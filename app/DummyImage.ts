@@ -1,5 +1,5 @@
 export const imageUrls = [
-    "https://source.unsplash.com/random/400x600",
+    "https://source.unsplash.com/random/400x800",
     "https://source.unsplash.com/random/800x1200",
     "https://source.unsplash.com/random/600x900",
     "https://source.unsplash.com/random/700x1000",
