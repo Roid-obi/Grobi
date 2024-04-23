@@ -1,9 +1,10 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
-import { getMessaging } from "firebase/messaging";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// TODO: Replace the following with your app's Firebase project configuration
+// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB9FxJ_f96TqSFv7wR312wLPhO4pZGnfhI",
     authDomain: "grobi-gallery.firebaseapp.com",
@@ -14,9 +15,9 @@ const firebaseConfig = {
     appId: "1:1091941921955:web:537de03713580281aefb16"
 };
 
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const messaging = getMessaging(app);
 const database = getDatabase(app);
 
 export default database;
