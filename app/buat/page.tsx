@@ -1,18 +1,14 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Buat from "./buat";
 
-export default function Buat() {
-  const router = useRouter();
-  useEffect(() => {});
-  const HandleBack = () => {
-    router.back();
-  };
+export const metadata = {
+  title: 'Grobi Gallery | Buat',
+};
+
+export default function Page() {
 
   return (
     <main>
-      Buat
-      <button onClick={HandleBack}>Back</button>
+      <Buat />
     </main>
   );
 }

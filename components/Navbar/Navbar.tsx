@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { BackNavbar, ButtonNav, ContentNavbar, IconNav, NavbarStyled } from "./Navbar.styled";
+import { BackNavbar, ButtonLogin, ButtonNav, ButtonRegister, ContentNavbar, FormSearch, IconNav, NavbarStyled } from "./Navbar.styled";
 import { usePathname } from "next/navigation";
-import LogoNav from "@/assets/Logo/logo-grobi.png"
+import LogoNav from "@/assets/Logo/grobi.png";
 
 export default function Navbar() {
   const pathName = usePathname();
@@ -11,9 +11,9 @@ export default function Navbar() {
     <BackNavbar>
       <NavbarStyled>
         <ContentNavbar>
-            <IconNav>
-              <img src={LogoNav.src} alt="..." className="icon-navbar" />
-            </IconNav>
+          <IconNav>
+            <img src={LogoNav.src} alt="..." className="icon-navbar" />
+          </IconNav>
           <Link href={"/"}>
             <ButtonNav className={pathName === "/" ? "active" : ""}>Beranda</ButtonNav>
           </Link>
@@ -23,6 +23,9 @@ export default function Navbar() {
           <Link href={"/buat"}>
             <ButtonNav className={pathName === "/buat" ? "active" : ""}>Buat</ButtonNav>
           </Link>
+          <FormSearch placeholder="Cari Foto..." />
+          <ButtonLogin>Masuk</ButtonLogin>
+          <ButtonRegister>Daftar</ButtonRegister>
         </ContentNavbar>
       </NavbarStyled>
     </BackNavbar>

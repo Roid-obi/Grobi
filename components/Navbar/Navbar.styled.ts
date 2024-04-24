@@ -32,9 +32,10 @@ export const IconNav = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px;
+  width: 100%;
+  max-width: 48px;
   height: 48px;
-  border-radius: 100%;
+  border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s; /* Transisi untuk perubahan background-color saat hover */
   &:hover {
@@ -56,6 +57,83 @@ export const IconNav = styled.div`
 `;
 
 export const ButtonNav = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 16px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  font-weight: 600;
+
+  color: var(--black);
+  background: var(--white);
+  cursor: pointer;
+
+  &.active {
+    color: var(--white);
+    background: var(--black);
+  }
+
+  &:hover {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
+    outline: 0;
+  }
+`;
+
+
+// search form
+export const FormSearch = styled.input`
+  width: 100%;
+  max-width: 1000px;
+  padding: 0px 16px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: #767676;
+  background: #ececec93;
+  position: relative;
+  &::placeholder {
+    color: #767676;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  
+  &:hover {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
+    outline: 0;
+  }
+  
+`;
+
+
+export const ButtonLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 16px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  font-weight: 600;
+
+  color: var(--white);
+  background: var(--primary);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
+    outline: 0;
+  }
+`;
+
+export const ButtonRegister = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

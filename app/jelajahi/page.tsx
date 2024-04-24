@@ -1,18 +1,14 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Jelajahi from "./jelajahi";
 
-export default function Jelajahi() {
-  const router = useRouter();
-  useEffect(() => {});
-  const HandleBack = () => {
-    router.back();
-  };
+export const metadata = {
+  title: 'Grobi Gallery | Jelajahi',
+};
+
+export default function Page() {
 
   return (
     <main>
-      Jelajahi
-      <button onClick={HandleBack}>Back</button>
+      <Jelajahi />
     </main>
   );
 }
