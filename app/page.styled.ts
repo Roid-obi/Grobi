@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const HomeStyled = styled.div`
   margin-top: 10px;
   width: 100%;
-  padding: 0px 20px;
+  padding: 0px 16px;
   columns: 6;
   column-gap: 10px;
 
