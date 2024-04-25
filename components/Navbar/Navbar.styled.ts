@@ -19,12 +19,19 @@ export const NavbarStyled = styled.nav`
 export const ContentNavbar = styled.div`
   margin: auto;
   width: 100%;
+  max-width: 1600px;
   padding: 0px 16px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   a {
     text-decoration: none;
+  }
+
+  .logo-navbar {
+    width: 100%;
+    max-width: 48px;
   }
 `;
 
@@ -76,12 +83,15 @@ export const ButtonNav = styled.div`
     background: var(--black);
   }
 
+  &:active {
+    opacity: 0.8;
+  }
+
   &:hover {
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
     outline: 0;
   }
 `;
-
 
 // search form
 export const FormSearch = styled.input`
@@ -103,14 +113,12 @@ export const FormSearch = styled.input`
   &:focus {
     outline: none;
   }
-  
+
   &:hover {
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
     outline: 0;
   }
-  
 `;
-
 
 export const ButtonLogin = styled.div`
   display: flex;
@@ -126,6 +134,10 @@ export const ButtonLogin = styled.div`
   color: var(--white);
   background: var(--primary);
   cursor: pointer;
+
+  &:active {
+    opacity: 0.8;
+  }
 
   &:hover {
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
@@ -148,9 +160,8 @@ export const ButtonRegister = styled.div`
   background: var(--white);
   cursor: pointer;
 
-  &.active {
-    color: var(--white);
-    background: var(--black);
+  &:active {
+    opacity: 0.8;
   }
 
   &:hover {

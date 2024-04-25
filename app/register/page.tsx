@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { ref, push, set } from "firebase/database";
 import database from "@/firebaseConfig";
+import { useRouter } from "next/navigation";
 
 interface RegisterProps {
   // Tambahkan properti jika diperlukan
@@ -22,6 +23,7 @@ const Register: React.FC<RegisterProps> = () => {
   const [email, setEmail] = useState<string>("");
   const [fullName, setFullName] = useState<string>("");
   const [address, setAddress] = useState<string>("");
+  const router = useRouter();
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -68,6 +70,7 @@ const Register: React.FC<RegisterProps> = () => {
       setEmail("");
       setFullName("");
       setAddress("");
+      router.push('/login');
     } catch (error) {
       console.error("Error menambahkan user ke database:", error);
     }

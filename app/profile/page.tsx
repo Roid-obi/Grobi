@@ -1,28 +1,112 @@
 "use client";
-import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
-const Profile: React.FC = () => {
-  const [user, setUser] = useState<any>(null);
+interface ProfileProps {}
+
+const Profile: React.FC<ProfileProps> = () => {
+  const router = useRouter();
+  const [username, setUsername] = useState<string>("");
+  const [fullName, setFullName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [role, setRole] = useState<string>("");
 
   useEffect(() => {
-    const userData = Cookies.get('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
+    // Mengambil nilai cookie yang diperlukan
+    const userCookie = Cookies.get("user");
+    const userIdCookie = Cookies.get("user-id");
+    const roleCookie = Cookies.get("role");
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+    // Redirect ke halaman login jika cookie tidak ada
+    if (!userCookie || !userIdCookie || !roleCookie) {
+      router.push("/login");
+      return;
+    }
+
+    // Mengatur state berdasarkan nilai cookie
+    setUsername(userCookie);
+    setRole(roleCookie);
+
+    // Mengambil informasi pengguna dari database (contoh: Firebase)
+    const getUserProfile = async () => {
+      try {
+        // Panggil fungsi untuk mengambil informasi pengguna dari database
+        const userProfile = await fetchUserProfile(userIdCookie);
+
+        if (userProfile) {
+          setFullName(userProfile.fullName);
+          setEmail(userProfile.email);
+          setAddress(userProfile.address);
+        } else {
+          console.error("Informasi pengguna tidak ditemukan");
+        }
+      } catch (error) {
+        console.error("Gagal mengambil informasi pengguna:", error);
+      }
+    };
+
+    // Panggil fungsi untuk mengambil informasi pengguna
+    getUserProfile();
+  }, [router]);
+
+  // Fungsi untuk mengambil informasi pengguna dari database (contoh: Firebase)
+  const fetchUserProfile = async (userId: string): Promise<UserProfile | null> => {
+    // Lakukan pengambilan data pengguna berdasarkan userId dari database
+    // Contoh pengambilan data dari Firebase Realtime Database:
+    // const response = await database.ref(`users/${userId}`).once("value");
+    // const userProfile = response.val();
+
+    // Contoh pengambilan data statis (simulasi)
+    const userProfile: UserProfile | null = {
+      fullName: "???",
+      email: "???",
+      address: "???",
+    };
+
+    return userProfile;
+  };
+
+  const handleLogout = () => {
+    // Hapus semua cookie terkait informasi login pengguna
+    Cookies.remove("user");
+    Cookies.remove("user-id");
+    Cookies.remove("role");
+
+    // Redirect kembali ke halaman login
+    router.push("/login");
+  };
 
   return (
-    <div>
-      <h2>Welcome, {user.username}</h2>
-      <p>Email: {user.email}</p>
-      {/* You can display other user information here */}
+    <div className="p-4">
+      <h1 className="text-2xl font-semibold mb-4">Profil Pengguna</h1>
+      <p>
+        <strong>Username:</strong> {username}
+      </p>
+      <p>
+        <strong>Nama Lengkap:</strong> {fullName}
+      </p>
+      <p>
+        <strong>Email:</strong> {email}
+      </p>
+      <p>
+        <strong>Alamat:</strong> {address}
+      </p>
+      <p>
+        <strong>Role:</strong> {role}
+      </p>
+      <button onClick={handleLogout} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">
+        Log Out
+      </button>
     </div>
   );
 };
 
 export default Profile;
+
+interface UserProfile {
+  fullName: string;
+  email: string;
+  address: string;
+}

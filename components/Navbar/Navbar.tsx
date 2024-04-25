@@ -11,9 +11,11 @@ export default function Navbar() {
     <BackNavbar>
       <NavbarStyled>
         <ContentNavbar>
-          <IconNav>
-            <img src={LogoNav.src} alt="..." className="icon-navbar" />
-          </IconNav>
+          <Link href={"/"} className="logo-navbar">
+            <IconNav>
+              <img src={LogoNav.src} alt="..." className="icon-navbar" />
+            </IconNav>
+          </Link>
           <Link href={"/"}>
             <ButtonNav className={pathName === "/" ? "active" : ""}>Beranda</ButtonNav>
           </Link>
@@ -24,8 +26,12 @@ export default function Navbar() {
             <ButtonNav className={pathName === "/buat" ? "active" : ""}>Buat</ButtonNav>
           </Link>
           <FormSearch placeholder="Cari Foto..." />
-          <ButtonLogin>Masuk</ButtonLogin>
-          <ButtonRegister>Daftar</ButtonRegister>
+          <Link href={"/login"}>
+            <ButtonLogin>Masuk</ButtonLogin>
+          </Link>
+          <Link href={"/register"}>
+            <ButtonRegister>Daftar</ButtonRegister>
+          </Link>
         </ContentNavbar>
       </NavbarStyled>
     </BackNavbar>

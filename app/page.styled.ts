@@ -2,8 +2,9 @@
 import styled from "styled-components";
 
 export const HomeStyled = styled.div`
-  margin-top: 10px;
+  margin: 10px auto 0px auto;
   width: 100%;
+  max-width: 1600px;
   padding: 0px 16px;
   columns: 6;
   column-gap: 10px;
