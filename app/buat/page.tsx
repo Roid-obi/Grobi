@@ -1,14 +1,16 @@
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 import Buat from "./buat";
 
 export const metadata = {
-  title: 'Grobi Gallery | Buat',
+  title: "Grobi Gallery | Buat",
 };
 
 export default function Page() {
-
   return (
-    <main>
-      <Buat />
-    </main>
+    <>
+      <ProtectedRoute>
+        <Buat />
+      </ProtectedRoute>
+    </>
   );
 }

@@ -34,7 +34,7 @@ const ModalContainer = styled.div`
   }
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
@@ -43,7 +43,6 @@ const CloseButton = styled.button`
   svg {
     width: 20px;
     height: 20px;
-
   }
   /* svg path {
     width: 40px;
@@ -60,7 +59,7 @@ const Modal: FC<ModalProps> = ({ open, onClose, children }) => {
   if (!open) return null;
 
   return (
-    <ModalOverlay open={open}>
+    <ModalOverlay open={open} onClick={onClose}>
       <ModalContainer>
         <CloseButton onClick={onClose}><CloseIcon /></CloseButton>
         {children}

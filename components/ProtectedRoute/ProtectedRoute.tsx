@@ -27,7 +27,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, allowedRoutes
     return allowedRoutes.includes(currentRoute);
   };
 
-  return <>{children}</>;
+  return <div>{children}</div>;
 };
 
 export default ProtectedRoute;

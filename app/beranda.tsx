@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { CardImage, HomeStyled } from './page.styled';
 import { imageUrls } from './DummyImage';
+import LoadingSquare from '@/components/LoadingSquare/LoadingSquare';
 
 export default function Beranda() {
   const [loadingImages, setLoadingImages] = useState(true);
@@ -12,11 +13,11 @@ export default function Beranda() {
   };
 
   return (
-    <main>
+    <>
       <HomeStyled>
         {imageUrls.map((url, index) => (
           <CardImage key={index}>
-            {loadingImages && <p>Loading...</p>}
+            {loadingImages && <LoadingSquare />}
             <img
               src={url}
               alt={`Random Image ${index}`}
@@ -26,6 +27,6 @@ export default function Beranda() {
           </CardImage>
         ))}
       </HomeStyled>
-    </main>
+    </>
   );
 }

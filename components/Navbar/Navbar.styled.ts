@@ -24,7 +24,7 @@ export const ContentNavbar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 5px;
   a {
     text-decoration: none;
   }

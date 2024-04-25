@@ -7,7 +7,6 @@ interface CardProps {
   imageUrl: string;
 }
 
-// Styled komponen untuk Card
 const CardContainer = styled.div``;
 
 const CardImage = styled.img``;
