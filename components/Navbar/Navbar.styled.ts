@@ -72,7 +72,7 @@ export const ButtonNav = styled.div`
   height: 48px;
   border-radius: 24px;
   border: none;
-  font-weight: 600;
+  font-weight: 500;
 
   color: var(--black);
   background: var(--white);
@@ -83,7 +83,13 @@ export const ButtonNav = styled.div`
     background: var(--black);
   }
 
+  &:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
+
+  }
+
   &:active {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(135, 136, 138, 0.25), 0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
     opacity: 0.8;
   }
 
@@ -96,7 +102,7 @@ export const ButtonNav = styled.div`
 // search form
 export const FormSearch = styled.input`
   width: 100%;
-  max-width: 1000px;
+  /* max-width: 1000px; */
   padding: 0px 16px;
   height: 48px;
   border-radius: 24px;
@@ -157,7 +163,7 @@ export const ButtonRegister = styled.div`
   font-weight: 600;
 
   color: var(--black);
-  background: var(--white);
+  background: var(--tp-gray);
   cursor: pointer;
 
   &:active {

@@ -3,6 +3,14 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { ref, push, set } from "firebase/database";
 import database from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
+import Modal from "@/components/Modal/Modal";
+import { ButtonRegister, CloseButton, FormRegister, InputItem, TitleCard } from "./register.styled";
+import Input from "@/components/Input/Input";
+import CloseIcon from "@/assets/modal/close";
+import Link from "next/link";
+import { CardImage, HomeStyled } from "../page.styled";
+import { imageUrls } from "../DummyImage";
+import LoadingSquare from "@/components/LoadingSquare/LoadingSquare";
 
 interface RegisterProps {
   // Tambahkan properti jika diperlukan
@@ -70,73 +78,81 @@ const Register: React.FC<RegisterProps> = () => {
       setEmail("");
       setFullName("");
       setAddress("");
-      router.push('/login');
+      router.push("/login");
     } catch (error) {
       console.error("Error menambahkan user ke database:", error);
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <form onSubmit={addUserToDatabase}>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
-          required
-        />
-      </div>
+    <HomeStyled>
+      <Modal open={true} onClose={handleCloseModal}>
+        <FormRegister onSubmit={addUserToDatabase}>
+          <CloseButton>
+            <Link href={"/"}>
+              <CloseIcon />
+            </Link>
+          </CloseButton>
+          <TitleCard>Register</TitleCard>
+          <InputItem>
+            <Input onChange={handleUsernameChange} placeHolder="Masukkan username" type="no-icon" value={username} labelText="Username" error={false} errorMessage="" />
+          </InputItem>
+          <InputItem>
+            <Input onChange={handlePasswordChange} placeHolder="Masukkan password" type="password" value={password} labelText="Password" error={false} errorMessage="" />
+          </InputItem>
 
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-      </div>
+          <InputItem>
+            <Input onChange={handleEmailChange} placeHolder="Masukkan email" type="no-icon" value={email} labelText="Email" error={false} errorMessage="" />
+          </InputItem>
+          <InputItem>
+            <Input onChange={handleFullNameChange} placeHolder="Masukkan nama lengkap" type="no-icon" value={fullName} labelText="Nama Lengkap" error={false} errorMessage="" />
+          </InputItem>
+          <InputItem>
+            <Input onChange={handleAddressChange} placeHolder="Masukkan alamat" type="no-icon" value={address} labelText="Alamat" error={false} errorMessage="" />
+          </InputItem>
+          {/* <div>
+          <label htmlFor="username">Username</label>
+          <input type="text" id="username" value={username} onChange={handleUsernameChange} required />
+        </div>
 
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-      </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+        </div> */}
 
-      <div>
-        <label htmlFor="fullName">Nama Lengkap</label>
-        <input
-          type="text"
-          id="fullName"
-          value={fullName}
-          onChange={handleFullNameChange}
-          required
-        />
-      </div>
+          {/* <div>
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" value={email} onChange={handleEmailChange} required />
+        </div> */}
 
-      <div>
-        <label htmlFor="address">Alamat</label>
-        <input
-          type="text"
-          id="address"
-          value={address}
-          onChange={handleAddressChange}
-          required
-        />
-      </div>
+          {/* <div>
+          <label htmlFor="fullName">Nama Lengkap</label>
+          <input type="text" id="fullName" value={fullName} onChange={handleFullNameChange} required />
+        </div>
 
-      <div>
-        <button type="submit">Tambah User</button>
-      </div>
-    </form>
+        <div>
+          <label htmlFor="address">Alamat</label>
+          <input type="text" id="address" value={address} onChange={handleAddressChange} required />
+        </div> */}
+          <ButtonRegister type="submit">Tambah User</ButtonRegister>
+        </FormRegister>
+      </Modal>
+      {imageUrls.map((index) => (
+        <CardImage key={index}>
+          <LoadingSquare />
+        </CardImage>
+      ))}
+    </HomeStyled>
   );
 };
 

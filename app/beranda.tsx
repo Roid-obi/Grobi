@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CardImage, HomeStyled } from './page.styled';
 import { imageUrls } from './DummyImage';
 import LoadingSquare from '@/components/LoadingSquare/LoadingSquare';
+import Cookies from "js-cookie";
 
 export default function Beranda() {
   const [loadingImages, setLoadingImages] = useState(true);
@@ -11,6 +12,10 @@ export default function Beranda() {
   const handleAllImagesLoaded = () => {
     setLoadingImages(false);
   };
+
+  console.log(Cookies.get());
+
+  
 
   return (
     <>

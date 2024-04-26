@@ -1,6 +1,6 @@
-import { FC, ReactNode } from 'react';
-import styled from 'styled-components';
-import CloseIcon from '../../assets/modal/close';
+import { FC, ReactNode } from "react";
+import styled from "styled-components";
+import CloseIcon from "../../assets/modal/close";
 
 interface ModalProps {
   open: boolean;
@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 const ModalOverlay = styled.div<{ open: boolean }>`
-  display: ${(props) => (props.open ? 'block' : 'none')};
+  display: ${(props) => (props.open ? "block" : "none")};
   position: fixed;
   top: 0;
   left: 0;
@@ -25,13 +25,18 @@ const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 10px;
+  z-index: 101;
+  width: 100%;
+  max-width: 500px;
+  @media (width <= 768px) {
+  }
+`;
+
+const CardModal = styled.div`
   background-color: white;
   padding: 32px;
   border-radius: 30px;
-  z-index: 101;
-  @media (width <= 768px) {
-
-  }
 `;
 
 const CloseButton = styled.div`
@@ -48,7 +53,7 @@ const CloseButton = styled.div`
     width: 40px;
     height: 40px;
   } */
-  &:hover{
+  &:hover {
     svg path {
       fill: #e00000ca;
     }
@@ -61,8 +66,10 @@ const Modal: FC<ModalProps> = ({ open, onClose, children }) => {
   return (
     <ModalOverlay open={open} onClick={onClose}>
       <ModalContainer>
-        <CloseButton onClick={onClose}><CloseIcon /></CloseButton>
-        {children}
+        <CardModal>
+          {/* <CloseButton onClick={onClose}><CloseIcon /></CloseButton> */}
+          {children}
+        </CardModal>
       </ModalContainer>
     </ModalOverlay>
   );

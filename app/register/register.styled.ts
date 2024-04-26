@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginStyled = styled.div`
+export const RegisterStyled = styled.div`
   width: 100%;
   height: 80vh;
   display: flex;
@@ -8,7 +8,7 @@ export const LoginStyled = styled.div`
   align-items: center;
 `;
 
-export const CardLogin = styled.div`
+export const CardRegister = styled.div`
     border: 1px solid var(--border);
     padding: 30px;
     width: 100%;
@@ -16,7 +16,7 @@ export const CardLogin = styled.div`
     border-radius: 24px;
 `;
 
-export const FormLogin = styled.form`
+export const FormRegister = styled.form`
     width: 100%;
 `;
 
@@ -34,7 +34,7 @@ export const InputItem = styled.div`
     margin-top: 20px;
 `;
 
-export const ButtonLogin = styled.button`
+export const ButtonRegister = styled.button`
     margin-top: 20px;
     width: 100%;
   display: flex;

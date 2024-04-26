@@ -14,7 +14,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, allowedRoutes
 
   useEffect(() => {
     // Mengambil nilai cookie yang diperlukan
-    const userCookie = Cookies.get("user");
+    const userCookie = Cookies.get("user-id");
 
     // Periksa jika pengguna tidak memiliki cookie dan bukan berada di rute yang diizinkan
     if (!userCookie && !isAllowedRoute(pathName, allowedRoutes)) {
@@ -27,7 +27,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, allowedRoutes
     return allowedRoutes.includes(currentRoute);
   };
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;
