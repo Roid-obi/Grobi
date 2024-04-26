@@ -110,7 +110,6 @@ const Register: React.FC<RegisterProps> = () => {
           <InputItem>
             <Input onChange={handlePasswordChange} placeHolder="Masukkan password" type="password" value={password} labelText="Password" error={false} errorMessage="" />
           </InputItem>
-
           <InputItem>
             <Input onChange={handleEmailChange} placeHolder="Masukkan email" type="no-icon" value={email} labelText="Email" error={false} errorMessage="" />
           </InputItem>
@@ -120,30 +119,6 @@ const Register: React.FC<RegisterProps> = () => {
           <InputItem>
             <Input onChange={handleAddressChange} placeHolder="Masukkan alamat" type="no-icon" value={address} labelText="Alamat" error={false} errorMessage="" />
           </InputItem>
-          {/* <div>
-          <label htmlFor="username">Username</label>
-          <input type="text" id="username" value={username} onChange={handleUsernameChange} required />
-        </div>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
-        </div> */}
-
-          {/* <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={email} onChange={handleEmailChange} required />
-        </div> */}
-
-          {/* <div>
-          <label htmlFor="fullName">Nama Lengkap</label>
-          <input type="text" id="fullName" value={fullName} onChange={handleFullNameChange} required />
-        </div>
-
-        <div>
-          <label htmlFor="address">Alamat</label>
-          <input type="text" id="address" value={address} onChange={handleAddressChange} required />
-        </div> */}
           <ButtonRegister type="submit">Tambah User</ButtonRegister>
         </FormRegister>
       </Modal>

@@ -29,6 +29,7 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
+  
   const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -48,7 +49,7 @@ export default function Login() {
           Cookies.set("role", users[userId].role, { expires: 7 });
           Cookies.set("user-id", userId, { expires: 7 });
 
-          const redirectUrl = `/profile`;
+          const redirectUrl = `/`;
           router.push(redirectUrl);
 
           setError(false);
@@ -92,21 +93,6 @@ export default function Login() {
           <InputItem>
             <Input onChange={handlePasswordChange} placeHolder="Masukkan password" type="password" value={password} labelText="Password" error={false} errorMessage="" />
           </InputItem>
-
-          {/* <div>
-          <label htmlFor="username" className="block mb-1">
-            Username
-          </label>
-          <input type="text" id="username" value={username} onChange={handleUsernameChange} className="w-full border p-2 rounded" required />
-        </div>
-
-        <div>
-          <label htmlFor="password" className="block mb-1">
-            Password
-          </label>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} className="w-full border p-2 rounded" required />
-        </div> */}
-
           <ButtonLogin type="submit">Login</ButtonLogin>
         </FormLogin>
       </Modal>

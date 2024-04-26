@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BackNavbar, ButtonLogin, ButtonNav, ButtonRegister, ContentNavbar, FormSearch, IconNav, NavbarStyled } from "./Navbar.styled";
 import { usePathname } from "next/navigation";
@@ -7,8 +7,20 @@ import LogoNav from "@/assets/Logo/grobi-gallery.png";
 import Cookies from "js-cookie";
 
 export default function Navbar() {
+  const [tokenExists, setTokenExists] = useState(false);
   const pathName = usePathname();
   // Jika tidak dalam keadaan loading, tampilkan navbar dengan logo dan tombol navigasi
+  useEffect(() => {
+    const token = Cookies.get("user-id"); // Gantilah 'token' dengan nama yang sesuai dari Cookies Anda
+    setTokenExists(!!token); // Set tokenExists menjadi true jika token ada, false jika tidak
+  }, []);
+
+  const handleLogout = () => {
+    Cookies.remove("user-id"); // Hapus token dari cookies
+    Cookies.remove("user"); // Hapus token dari cookies
+    Cookies.remove("role"); // Hapus token dari cookies
+    setTokenExists(false); // Set tokenExists menjadi false setelah logout
+  };
   return (
     <BackNavbar>
       <NavbarStyled>
@@ -25,17 +37,21 @@ export default function Navbar() {
             <ButtonNav className={pathName === "/jelajahi" ? "active" : ""}>Jelajahi</ButtonNav>
           </Link>
           <Link href={"/buat"}>
-            <ButtonNav className={pathName === "/buat" ? "active" : ""}>Buat</ButtonNav>
+            <ButtonNav className={pathName.startsWith("/buat") ? "active" : ""}>Buat</ButtonNav>
           </Link>
           <FormSearch placeholder="Cari Foto..." />
-          <>
-            <Link href={"/login"}>
-              <ButtonLogin>Masuk</ButtonLogin>
-            </Link>
-            <Link href={"/register"}>
-              <ButtonRegister>Daftar</ButtonRegister>
-            </Link>
-          </>
+          {!tokenExists ? (
+            <>
+              <Link href={"/login"}>
+                <ButtonLogin>Masuk</ButtonLogin>
+              </Link>
+              <Link href={"/register"}>
+                <ButtonNav>Daftar</ButtonNav>
+              </Link>
+            </>
+          ) : (
+            <ButtonNav onClick={handleLogout}>Keluar</ButtonNav>
+          )}
         </ContentNavbar>
       </NavbarStyled>
     </BackNavbar>

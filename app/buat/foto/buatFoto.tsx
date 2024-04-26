@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function Buat() {
+export default function BuatFoto() {
   const router = useRouter();
   useEffect(() => {});
   const HandleBack = () => {
@@ -12,9 +12,7 @@ export default function Buat() {
 
   return (
     <main>
-      Buat :<br />
-      <Link href={"/buat/album"}>Buat ALbum</Link><br />
-      <Link href={"/buat/foto"}>Buat Foto</Link><br />
+      Buat Foto
       <button onClick={HandleBack}>Back</button>
     </main>
   );
