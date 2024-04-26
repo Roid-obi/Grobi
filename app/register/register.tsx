@@ -11,6 +11,7 @@ import Link from "next/link";
 import { CardImage, HomeStyled } from "../page.styled";
 import { imageUrls } from "../DummyImage";
 import LoadingSquare from "@/components/LoadingSquare/LoadingSquare";
+import toast from "react-hot-toast";
 
 interface RegisterProps {
   // Tambahkan properti jika diperlukan
@@ -55,32 +56,38 @@ const Register: React.FC<RegisterProps> = () => {
 
   const addUserToDatabase = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const usersRef = ref(database, "users");
+  
+    // Validasi semua data harus diisi
+    if (!username || !password || !email || !fullName || !address) {
+      toast.error('Semua data harus diisi');
+      return;
+    }
+  
+    const usersRef = ref(database, 'users');
     const newUserRef = push(usersRef);
-
+  
     const newUser: User = {
       username: username,
       password: password,
       email: email,
       fullName: fullName,
       address: address,
-      role: "user", // Set role ke "user"
+      role: 'user',
     };
-
+  
     try {
       await set(newUserRef, newUser);
-      console.log("User berhasil ditambahkan ke database");
-
+      console.log('User berhasil ditambahkan ke database');
+  
       // Reset state setelah submit berhasil
-      setUsername("");
-      setPassword("");
-      setEmail("");
-      setFullName("");
-      setAddress("");
-      router.push("/login");
+      setUsername('');
+      setPassword('');
+      setEmail('');
+      setFullName('');
+      setAddress('');
+      router.push('/login');
     } catch (error) {
-      console.error("Error menambahkan user ke database:", error);
+      console.error('Error menambahkan user ke database:', error);
     }
   };
 

@@ -12,6 +12,7 @@ import CloseIcon from "@/assets/modal/close";
 import { imageUrls } from "../DummyImage";
 import { CardImage, HomeStyled } from "../page.styled";
 import LoadingSquare from "@/components/LoadingSquare/LoadingSquare";
+import { toast, Toaster } from 'react-hot-toast'; // Import toast from react-hot-toast
 
 interface LoginProps {}
 
@@ -19,7 +20,6 @@ export default function Login() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -29,7 +29,6 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  
   const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -51,15 +50,12 @@ export default function Login() {
 
           const redirectUrl = `/`;
           router.push(redirectUrl);
-
-          setError(false);
         } else {
-          setError(true);
-          console.log("Username or password is incorrect");
+          toast.error('Username or password is incorrect'); // Show toast for incorrect username or password
         }
       }
     } catch (error) {
-      setError(true);
+      toast.error('Username atau password tidak sesuai'); // Show toast for login error
       console.error("Error logging in:", error);
     }
   };
@@ -84,9 +80,6 @@ export default function Login() {
             </Link>
           </CloseButton>
           <TitleCard>Login</TitleCard>
-
-          {error && <p className="">Username or password is incorrect</p>}
-
           <InputItem>
             <Input onChange={handleUsernameChange} placeHolder="Masukkan username" type="no-icon" value={username} labelText="Username" error={false} errorMessage="" />
           </InputItem>
