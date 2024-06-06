@@ -126,7 +126,7 @@ const Register: React.FC<RegisterProps> = () => {
           <InputItem>
             <Input onChange={handleAddressChange} placeHolder="Masukkan alamat" type="no-icon" value={address} labelText="Alamat" error={false} errorMessage="" />
           </InputItem>
-          <ButtonRegister type="submit">Tambah User</ButtonRegister>
+          <ButtonRegister type="submit">Register</ButtonRegister>
         </FormRegister>
       </Modal>
       {imageUrls.map((index) => (

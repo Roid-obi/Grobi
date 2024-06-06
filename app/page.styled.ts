@@ -23,6 +23,7 @@ export const CardImage = styled.div`
   width: 100%;
   margin-bottom: 10px;
   break-inside: avoid;
+  cursor: pointer;
   img {
     max-width: 100%;
     border-radius: 15px;

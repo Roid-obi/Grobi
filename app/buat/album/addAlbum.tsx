@@ -2,8 +2,7 @@ import { app } from "@/firebaseConfig";
 import { getDatabase, push, ref } from "firebase/database";
 
 interface AlbumData {
-    title: string;
-    description: string;
+    
   }
 
 export const addAlbum = async (albumData: AlbumData) => {

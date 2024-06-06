@@ -48,14 +48,15 @@ export default function Login() {
           Cookies.set("role", users[userId].role, { expires: 7 });
           Cookies.set("user-id", userId, { expires: 7 });
 
+          toast.success('Username atau password tidak sesuai'); // Show toast for incorrect username or password
           const redirectUrl = `/`;
           router.push(redirectUrl);
         } else {
-          toast.error('Username or password is incorrect'); // Show toast for incorrect username or password
+          toast.error('Username atau password tidak sesuai'); // Show toast for incorrect username or password
         }
       }
     } catch (error) {
-      toast.error('Username atau password tidak sesuai'); // Show toast for login error
+      toast.error('Error logging in'); // Show toast for login error
       console.error("Error logging in:", error);
     }
   };
