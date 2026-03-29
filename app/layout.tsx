@@ -7,11 +7,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <body>
-        <Navbar />
         <StyledComponentsRegistry>
+          <Navbar />
           <main>{children}</main>
+          <Toaster position="top-center" reverseOrder={false} />
         </StyledComponentsRegistry>
-        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );
