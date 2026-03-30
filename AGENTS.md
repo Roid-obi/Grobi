@@ -167,6 +167,7 @@ Gunakan strategi berikut:
 - Gunakan styled-components
 - Hindari inline styles
 - Gunakan theme untuk warna & spacing
+- Semua icon wajib menggunakan `lucide-react` (hindari campur icon library lain)
 
 ---
 

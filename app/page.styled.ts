@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import styled from "styled-components";
 
 export const HomeStyled = styled.div`
@@ -10,7 +10,7 @@ export const HomeStyled = styled.div`
   column-gap: 10px;
 
   @media (max-width: 768px) {
-    margin-top: 5px;
+    margin-top: 10px;
     padding: 0px 10px;
     columns: 4;
   }
