@@ -80,7 +80,7 @@ export const IconNav = styled.div`
 export const DesktopNav = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 
   @media (max-width: 768px) {
     display: none;
