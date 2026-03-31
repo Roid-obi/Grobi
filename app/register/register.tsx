@@ -4,7 +4,7 @@ import { ref, push, set } from "firebase/database";
 import database from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Modal/Modal";
-import { ButtonRegister, CloseButton, FormRegister, InputItem, TitleCard } from "./register.styled";
+import { ButtonRegister, CloseButton, FormRegister, InputItem, TitleCard, WelcomeSection, LogoWrapper, WelcomeTitle, WelcomeTagline, LoginLink, ButtonWrapper } from "./register.styled";
 import Input from "@/components/Input/Input";
 import CloseIcon from "@/assets/modal/close";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { CardImage, HomeStyled } from "../page.styled";
 import { imageUrls } from "../DummyImage";
 import LoadingSquare from "@/components/LoadingSquare/LoadingSquare";
 import toast from "react-hot-toast";
+import LogoNav from "@/assets/Logo/grobi-gallery.png";
 
 interface RegisterProps {
   // Tambahkan properti jika diperlukan
@@ -56,38 +57,38 @@ const Register: React.FC<RegisterProps> = () => {
 
   const addUserToDatabase = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     // Validasi semua data harus diisi
     if (!username || !password || !email || !fullName || !address) {
-      toast.error('Semua data harus diisi');
+      toast.error("Semua data harus diisi");
       return;
     }
-  
-    const usersRef = ref(database, 'users');
+
+    const usersRef = ref(database, "users");
     const newUserRef = push(usersRef);
-  
+
     const newUser: User = {
       username: username,
       password: password,
       email: email,
       fullName: fullName,
       address: address,
-      role: 'user',
+      role: "user",
     };
-  
+
     try {
       await set(newUserRef, newUser);
-      console.log('User berhasil ditambahkan ke database');
-  
+      console.log("User berhasil ditambahkan ke database");
+
       // Reset state setelah submit berhasil
-      setUsername('');
-      setPassword('');
-      setEmail('');
-      setFullName('');
-      setAddress('');
-      router.push('/login');
+      setUsername("");
+      setPassword("");
+      setEmail("");
+      setFullName("");
+      setAddress("");
+      router.push("/login");
     } catch (error) {
-      console.error('Error menambahkan user ke database:', error);
+      console.error("Error menambahkan user ke database:", error);
     }
   };
 
@@ -110,7 +111,13 @@ const Register: React.FC<RegisterProps> = () => {
               <CloseIcon />
             </Link>
           </CloseButton>
-          <TitleCard>Register</TitleCard>
+          <WelcomeSection>
+            <LogoWrapper>
+              <img src={LogoNav.src} alt="Grobi" />
+            </LogoWrapper>
+            <WelcomeTitle>Welcome to Grobi</WelcomeTitle>
+            <WelcomeTagline>Your daily dose of visuals.</WelcomeTagline>
+          </WelcomeSection>
           <InputItem>
             <Input onChange={handleUsernameChange} placeHolder="Masukkan username" type="no-icon" value={username} labelText="Username" error={false} errorMessage="" />
           </InputItem>
@@ -126,7 +133,12 @@ const Register: React.FC<RegisterProps> = () => {
           <InputItem>
             <Input onChange={handleAddressChange} placeHolder="Masukkan alamat" type="no-icon" value={address} labelText="Alamat" error={false} errorMessage="" />
           </InputItem>
-          <ButtonRegister type="submit">Register</ButtonRegister>
+          <ButtonWrapper>
+            <ButtonRegister type="submit">Register</ButtonRegister>
+            <LoginLink>
+              Sudah punya akun? <Link href="/login">Masuk di sini</Link>
+            </LoginLink>
+          </ButtonWrapper>
         </FormRegister>
       </Modal>
       {imageUrls.map((index) => (

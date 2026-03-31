@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { ref, get } from "firebase/database";
 import database from "@/firebaseConfig"; // Import your Firebase database config
-import { ButtonLogin, CardLogin, CloseButton, FormLogin, InputItem, LoginStyled, TitleCard } from "./login.styled";
+import { ButtonLogin, CardLogin, CloseButton, ForgotPasswordLink, FormLogin, InputItem, LoginStyled, TitleCard, WelcomeSection, LogoWrapper, WelcomeTitle, WelcomeTagline, RegisterLink } from "./login.styled";
 import Input from "@/components/Input/Input";
 import Modal from "@/components/Modal/Modal";
 import Link from "next/link";
@@ -12,7 +12,8 @@ import CloseIcon from "@/assets/modal/close";
 import { imageUrls } from "../DummyImage";
 import { CardImage, HomeStyled } from "../page.styled";
 import LoadingSquare from "@/components/LoadingSquare/LoadingSquare";
-import { toast, Toaster } from 'react-hot-toast'; // Import toast from react-hot-toast
+import { toast, Toaster } from "react-hot-toast"; // Import toast from react-hot-toast
+import LogoNav from "@/assets/Logo/grobi-gallery.png";
 
 interface LoginProps {}
 
@@ -48,15 +49,15 @@ export default function Login() {
           Cookies.set("role", users[userId].role, { expires: 7 });
           Cookies.set("user-id", userId, { expires: 7 });
 
-          toast.success('Username atau password tidak sesuai'); // Show toast for incorrect username or password
+          toast.success("Username atau password tidak sesuai"); // Show toast for incorrect username or password
           const redirectUrl = `/`;
           router.push(redirectUrl);
         } else {
-          toast.error('Username atau password tidak sesuai'); // Show toast for incorrect username or password
+          toast.error("Username atau password tidak sesuai"); // Show toast for incorrect username or password
         }
       }
     } catch (error) {
-      toast.error('Error logging in'); // Show toast for login error
+      toast.error("Error logging in"); // Show toast for login error
       console.error("Error logging in:", error);
     }
   };
@@ -80,14 +81,26 @@ export default function Login() {
               <CloseIcon />
             </Link>
           </CloseButton>
-          <TitleCard>Login</TitleCard>
+          <WelcomeSection>
+            <LogoWrapper>
+              <img src={LogoNav.src} alt="Grobi" />
+            </LogoWrapper>
+            <WelcomeTitle>Welcome to Grobi</WelcomeTitle>
+            <WelcomeTagline>Your daily dose of visuals.</WelcomeTagline>
+          </WelcomeSection>
           <InputItem>
             <Input onChange={handleUsernameChange} placeHolder="Masukkan username" type="no-icon" value={username} labelText="Username" error={false} errorMessage="" />
           </InputItem>
           <InputItem>
             <Input onChange={handlePasswordChange} placeHolder="Masukkan password" type="password" value={password} labelText="Password" error={false} errorMessage="" />
           </InputItem>
+          <ForgotPasswordLink>
+            <button type="button">Forgot your password?</button>
+          </ForgotPasswordLink>
           <ButtonLogin type="submit">Login</ButtonLogin>
+          <RegisterLink>
+            Belum punya akun? <Link href="/register">Daftar di sini</Link>
+          </RegisterLink>
         </FormLogin>
       </Modal>
       {imageUrls.map((index) => (

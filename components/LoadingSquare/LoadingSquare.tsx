@@ -1,30 +1,30 @@
-"use client"
-import React from 'react';
+"use client";
+import React, { memo, useMemo } from "react";
 
 interface LoadingSquareProps {
   color?: string;
 }
 
 const LoadingSquare: React.FC<LoadingSquareProps> = ({ color }) => {
-  const randomColor = () => {
-    const colors = ['#011638', '#364156', '#CDCDCD',]; // Warna acak yang bisa dipilih
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
+  const backgroundColor = useMemo(() => {
+    const colors = ["#011638", "#364156", "#CDCDCD"];
+    return color || colors[Math.floor(Math.random() * colors.length)];
+  }, [color]);
 
-  const randomHeight = () => {
-    return Math.floor(Math.random() * (240 - 100 + 1) + 100); // Tinggi acak antara 100px hingga 240px
-  };
+  const stableHeight = useMemo(() => {
+    return Math.floor(Math.random() * (240 - 100 + 1) + 100);
+  }, []);
 
   return (
     <div
       style={{
-        backgroundColor: color || randomColor(),
-        width: '100%',
-        height: `${randomHeight()}px`, // Tinggi acak
-        borderRadius: "15px"
+        backgroundColor,
+        width: "100%",
+        height: `${stableHeight}px`,
+        borderRadius: "15px",
       }}
     ></div>
   );
 };
 
-export default LoadingSquare;
+export default memo(LoadingSquare);

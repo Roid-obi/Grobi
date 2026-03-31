@@ -14,10 +14,69 @@ export const CardRegister = styled.div`
   width: 100%;
   max-width: 500px;
   border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+`;
+
+export const WelcomeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  text-align: center;
+  flex-shrink: 0;
+`;
+
+export const LogoWrapper = styled.div`
+  margin-bottom: 15px;
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+`;
+
+export const WelcomeTitle = styled.h1`
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: var(--black);
+`;
+
+export const WelcomeTagline = styled.p`
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
 `;
 
 export const FormRegister = styled.form`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* max-height: calc(85vh - 200px); */
+  max-height: 85vh;
+  padding: 0px 4px 0px 4px;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+
+    &:hover {
+      background: #999;
+    }
+  }
 `;
 
 export const TitleCard = styled.p`
@@ -28,10 +87,12 @@ export const TitleCard = styled.p`
   margin: auto;
   font-size: 25px;
   font-weight: 600;
+  flex-shrink: 0;
 `;
 
 export const InputItem = styled.div`
   margin-top: 20px;
+  flex-shrink: 0;
 `;
 
 export const ButtonRegister = styled.button`
@@ -50,6 +111,7 @@ export const ButtonRegister = styled.button`
   color: var(--white);
   background: var(--primary);
   cursor: pointer;
+  flex-shrink: 0;
 
   &.active {
     color: var(--white);
@@ -67,6 +129,31 @@ export const ButtonRegister = styled.button`
       0px 0px 0px 3.5px rgba(206, 210, 216, 0.5);
     outline: 0;
   }
+`;
+
+export const LoginLink = styled.div`
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+  flex-shrink: 0;
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin-top: auto;
 `;
 
 export const CloseButton = styled.div`
