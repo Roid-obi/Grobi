@@ -10,7 +10,7 @@ const firebaseConfig = {
     authDomain: "grobi-gallery.firebaseapp.com",
     databaseURL: "https://grobi-gallery-default-rtdb.firebaseio.com",
     projectId: "grobi-gallery",
-    storageBucket: "grobi-gallery.appspot.com",
+    storageBucket: "grobi-gallery.firebasestorage.app",
     messagingSenderId: "1091941921955",
     appId: "1:1091941921955:web:537de03713580281aefb16"
 };

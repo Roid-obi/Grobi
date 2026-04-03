@@ -20,19 +20,21 @@ interface RegisterProps {
 
 interface User {
   username: string;
-  password: string;
   email: string;
-  fullName: string;
-  address: string;
-  role: string; // Tambah properti role
+  password: string;
+  role: string;
+  fullname: string;
+  "profile-picture"?: string;
+  about?: string;
 }
 
 const Register: React.FC<RegisterProps> = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [fullName, setFullName] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
+  const [fullname, setFullname] = useState<string>("");
+  const [profilePicture, setProfilePicture] = useState<string>("");
+  const [about, setAbout] = useState<string>("");
   const router = useRouter();
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,19 +49,23 @@ const Register: React.FC<RegisterProps> = () => {
     setEmail(e.target.value);
   };
 
-  const handleFullNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFullName(e.target.value);
+  const handleFullnameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFullname(e.target.value);
   };
 
-  const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
+  const handleProfilePictureChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setProfilePicture(e.target.value);
+  };
+
+  const handleAboutChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAbout(e.target.value);
   };
 
   const addUserToDatabase = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Validasi semua data harus diisi
-    if (!username || !password || !email || !fullName || !address) {
+    if (!username || !password || !email || !fullname) {
       toast.error("Semua data harus diisi");
       return;
     }
@@ -69,11 +75,12 @@ const Register: React.FC<RegisterProps> = () => {
 
     const newUser: User = {
       username: username,
-      password: password,
       email: email,
-      fullName: fullName,
-      address: address,
+      password: password,
       role: "user",
+      fullname: fullname,
+      ...(profilePicture.trim() ? { "profile-picture": profilePicture.trim() } : {}),
+      ...(about.trim() ? { about: about.trim() } : {}),
     };
 
     try {
@@ -84,8 +91,9 @@ const Register: React.FC<RegisterProps> = () => {
       setUsername("");
       setPassword("");
       setEmail("");
-      setFullName("");
-      setAddress("");
+      setFullname("");
+      setProfilePicture("");
+      setAbout("");
       router.push("/login");
     } catch (error) {
       console.error("Error menambahkan user ke database:", error);
@@ -128,10 +136,13 @@ const Register: React.FC<RegisterProps> = () => {
             <Input onChange={handleEmailChange} placeHolder="Masukkan email" type="no-icon" value={email} labelText="Email" error={false} errorMessage="" />
           </InputItem>
           <InputItem>
-            <Input onChange={handleFullNameChange} placeHolder="Masukkan nama lengkap" type="no-icon" value={fullName} labelText="Nama Lengkap" error={false} errorMessage="" />
+            <Input onChange={handleFullnameChange} placeHolder="Masukkan nama lengkap" type="no-icon" value={fullname} labelText="Nama Lengkap" error={false} errorMessage="" />
           </InputItem>
           <InputItem>
-            <Input onChange={handleAddressChange} placeHolder="Masukkan alamat" type="no-icon" value={address} labelText="Alamat" error={false} errorMessage="" />
+            <Input onChange={handleProfilePictureChange} placeHolder="Masukkan URL foto profil (opsional)" type="no-icon" value={profilePicture} labelText="Foto Profil" error={false} errorMessage="" />
+          </InputItem>
+          <InputItem>
+            <Input onChange={handleAboutChange} placeHolder="Ceritakan tentang kamu (opsional)" type="no-icon" value={about} labelText="About" error={false} errorMessage="" />
           </InputItem>
           <ButtonWrapper>
             <ButtonRegister type="submit">Register</ButtonRegister>

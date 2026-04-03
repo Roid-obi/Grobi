@@ -2,15 +2,18 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { get, ref } from "firebase/database";
+import database from "@/firebaseConfig";
 
 interface ProfileProps {}
 
 const Profile: React.FC<ProfileProps> = () => {
   const router = useRouter();
   const [username, setUsername] = useState<string>("");
-  const [fullName, setFullName] = useState<string>("");
+  const [fullname, setFullname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
+  const [about, setAbout] = useState<string>("");
+  const [profilePicture, setProfilePicture] = useState<string>("");
   const [role, setRole] = useState<string>("");
 
   useEffect(() => {
@@ -18,7 +21,6 @@ const Profile: React.FC<ProfileProps> = () => {
     const userCookie = Cookies.get("user");
     const userIdCookie = Cookies.get("user-id");
     const roleCookie = Cookies.get("role");
-    console.log()
 
     // Redirect ke halaman login jika cookie tidak ada
     if (!userCookie || !userIdCookie || !roleCookie) {
@@ -37,9 +39,11 @@ const Profile: React.FC<ProfileProps> = () => {
         const userProfile = await fetchUserProfile(userIdCookie);
 
         if (userProfile) {
-          setFullName(userProfile.fullName);
+          setFullname(userProfile.fullname);
           setEmail(userProfile.email);
-          setAddress(userProfile.address);
+          setAbout(userProfile.about ?? "-");
+          setProfilePicture(userProfile["profile-picture"] ?? "");
+          setRole(userProfile.role);
         } else {
           console.error("Informasi pengguna tidak ditemukan");
         }
@@ -54,15 +58,22 @@ const Profile: React.FC<ProfileProps> = () => {
 
   // Fungsi untuk mengambil informasi pengguna dari database (contoh: Firebase)
   const fetchUserProfile = async (userId: string): Promise<UserProfile | null> => {
+    const userRef = ref(database, `users/${userId}`);
+    const snapshot = await get(userRef);
 
-    // Contoh pengambilan data statis (simulasi)
-    const userProfile: UserProfile | null = {
-      fullName: "???",
-      email: "???",
-      address: "???",
+    if (!snapshot.exists()) {
+      return null;
+    }
+
+    const user = snapshot.val() as LegacyUserProfile | UserProfile;
+    return {
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      fullname: "fullname" in user ? user.fullname : user.fullName,
+      "profile-picture": "profile-picture" in user ? user["profile-picture"] : undefined,
+      about: "about" in user ? user.about : undefined,
     };
-
-    return userProfile;
   };
 
   const handleLogout = () => {
@@ -82,13 +93,16 @@ const Profile: React.FC<ProfileProps> = () => {
         <strong>Username:</strong> {username}
       </p>
       <p>
-        <strong>Nama Lengkap:</strong> {fullName}
+        <strong>Nama Lengkap:</strong> {fullname}
       </p>
       <p>
         <strong>Email:</strong> {email}
       </p>
       <p>
-        <strong>Alamat:</strong> {address}
+        <strong>About:</strong> {about || "-"}
+      </p>
+      <p>
+        <strong>Foto Profil:</strong> {profilePicture || "Belum diisi"}
       </p>
       <p>
         <strong>Role:</strong> {role}
@@ -103,7 +117,18 @@ const Profile: React.FC<ProfileProps> = () => {
 export default Profile;
 
 interface UserProfile {
-  fullName: string;
+  username: string;
   email: string;
-  address: string;
+  role: string;
+  fullname: string;
+  "profile-picture"?: string;
+  about?: string;
+}
+
+interface LegacyUserProfile {
+  username: string;
+  email: string;
+  role: string;
+  fullName: string;
+  address?: string;
 }

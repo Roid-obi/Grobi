@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const BackNavbar = styled.div<{ $mobileSearchOpen: boolean }>`
+export const BackNavbar = styled.div`
   width: 100%;
   height: 80px;
 
   @media (max-width: 768px) {
-    height: ${(props) => (props.$mobileSearchOpen ? "132px" : "72px")};
+    height: 72px;
   }
 `;
 
@@ -72,7 +72,7 @@ export const IconNav = styled.div`
 
   @media (max-width: 768px) {
     .icon-navbar {
-      width:40px;
+      width: 40px;
     }
   }
 `;
@@ -132,15 +132,32 @@ export const ButtonNav = styled.div`
 
 export const DesktopSearch = styled.div`
   flex: 1;
+  min-width: 0;
 
   @media (max-width: 768px) {
-    display: none;
+    display: block;
   }
+`;
+
+export const SearchInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const SearchIcon = styled.span`
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  color: #767676;
+  pointer-events: none;
 `;
 
 export const FormSearch = styled.input`
   width: 100%;
-  padding: 0 16px;
+  padding: 0 16px 0 42px;
   height: 48px;
   border-radius: 24px;
   border: none;
@@ -163,6 +180,11 @@ export const FormSearch = styled.input`
       0 0.5px 1.5px rgba(135, 136, 138, 0.25),
       0 0 0 3.5px rgba(206, 210, 216, 0.5);
     outline: 0;
+  }
+
+  @media (max-width: 768px) {
+    height: 40px;
+    font-size: 14px;
   }
 `;
 
@@ -209,8 +231,7 @@ export const MobileActionGroup = styled.div`
   @media (max-width: 768px) {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-left: auto;
+    flex-shrink: 0;
   }
 `;
 
@@ -228,15 +249,6 @@ export const IconButton = styled.button`
 
   &:active {
     transform: scale(0.96);
-  }
-`;
-
-export const MobileSearchWrapper = styled.div<{ $open: boolean }>`
-  display: none;
-
-  @media (max-width: 768px) {
-    display: ${(props) => (props.$open ? "block" : "none")};
-    padding: 0 0 12px;
   }
 `;
 

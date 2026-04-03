@@ -13,10 +13,10 @@ import {
   IconButton,
   IconNav,
   MobileActionGroup,
-  MobileSearchWrapper,
   MobileTabbar,
-  MobileTabbarSpacer,
   NavbarStyled,
+  SearchIcon,
+  SearchInputWrapper,
   TabItem,
   TopRow,
 } from "./Navbar.styled";
@@ -27,7 +27,6 @@ import { Compass, Home, Plus, Search, User } from "lucide-react";
 
 export default function Navbar() {
   const [tokenExists, setTokenExists] = useState(false);
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const pathName = usePathname();
 
   // Jika tidak dalam keadaan loading, tampilkan navbar dengan logo dan tombol navigasi
@@ -47,7 +46,7 @@ export default function Navbar() {
 
   return (
     <>
-      <BackNavbar $mobileSearchOpen={mobileSearchOpen}>
+      <BackNavbar>
         <NavbarStyled>
           <ContentNavbar>
             <TopRow>
@@ -70,7 +69,12 @@ export default function Navbar() {
               </DesktopNav>
 
               <DesktopSearch>
-                <FormSearch placeholder="Cari Foto..." />
+                <SearchInputWrapper>
+                  <SearchIcon>
+                    <Search size={18} />
+                  </SearchIcon>
+                  <FormSearch placeholder="Cari Foto..." />
+                </SearchInputWrapper>
               </DesktopSearch>
 
               <DesktopActions>
@@ -89,9 +93,6 @@ export default function Navbar() {
               </DesktopActions>
 
               <MobileActionGroup>
-                <IconButton type="button" aria-label="Buka pencarian" onClick={() => setMobileSearchOpen((prev) => !prev)}>
-                  <Search size={20} />
-                </IconButton>
                 <Link href={"/buat"} aria-label="Buat postingan">
                   <IconButton as="span">
                     <Plus size={20} />
@@ -99,10 +100,6 @@ export default function Navbar() {
                 </Link>
               </MobileActionGroup>
             </TopRow>
-
-            <MobileSearchWrapper $open={mobileSearchOpen}>
-              <FormSearch placeholder="Cari Foto..." />
-            </MobileSearchWrapper>
           </ContentNavbar>
         </NavbarStyled>
       </BackNavbar>
