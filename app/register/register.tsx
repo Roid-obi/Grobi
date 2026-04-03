@@ -24,7 +24,7 @@ interface User {
   password: string;
   role: string;
   fullname: string;
-  "profile-picture"?: string;
+  profile_picture?: string;
   about?: string;
 }
 
@@ -79,7 +79,7 @@ const Register: React.FC<RegisterProps> = () => {
       password: password,
       role: "user",
       fullname: fullname,
-      ...(profilePicture.trim() ? { "profile-picture": profilePicture.trim() } : {}),
+      ...(profilePicture.trim() ? { profile_picture: profilePicture.trim() } : {}),
       ...(about.trim() ? { about: about.trim() } : {}),
     };
 
@@ -139,7 +139,15 @@ const Register: React.FC<RegisterProps> = () => {
             <Input onChange={handleFullnameChange} placeHolder="Masukkan nama lengkap" type="no-icon" value={fullname} labelText="Nama Lengkap" error={false} errorMessage="" />
           </InputItem>
           <InputItem>
-            <Input onChange={handleProfilePictureChange} placeHolder="Masukkan URL foto profil (opsional)" type="no-icon" value={profilePicture} labelText="Foto Profil" error={false} errorMessage="" />
+            <Input
+              onChange={handleProfilePictureChange}
+              placeHolder="Masukkan URL foto profil (opsional)"
+              type="no-icon"
+              value={profilePicture}
+              labelText="Foto Profil"
+              error={false}
+              errorMessage=""
+            />
           </InputItem>
           <InputItem>
             <Input onChange={handleAboutChange} placeHolder="Ceritakan tentang kamu (opsional)" type="no-icon" value={about} labelText="About" error={false} errorMessage="" />

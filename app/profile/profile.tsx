@@ -42,7 +42,7 @@ const Profile: React.FC<ProfileProps> = () => {
           setFullname(userProfile.fullname);
           setEmail(userProfile.email);
           setAbout(userProfile.about ?? "-");
-          setProfilePicture(userProfile["profile-picture"] ?? "");
+          setProfilePicture(userProfile.profile_picture ?? "");
           setRole(userProfile.role);
         } else {
           console.error("Informasi pengguna tidak ditemukan");
@@ -71,7 +71,7 @@ const Profile: React.FC<ProfileProps> = () => {
       email: user.email,
       role: user.role,
       fullname: "fullname" in user ? user.fullname : user.fullName,
-      "profile-picture": "profile-picture" in user ? user["profile-picture"] : undefined,
+      profile_picture: "profile_picture" in user ? user.profile_picture : "profile-picture" in user ? user["profile-picture"] : undefined,
       about: "about" in user ? user.about : undefined,
     };
   };
@@ -121,7 +121,7 @@ interface UserProfile {
   email: string;
   role: string;
   fullname: string;
-  "profile-picture"?: string;
+  profile_picture?: string;
   about?: string;
 }
 
@@ -130,5 +130,7 @@ interface LegacyUserProfile {
   email: string;
   role: string;
   fullName: string;
+  profile_picture?: string;
+  "profile-picture"?: string;
   address?: string;
 }
